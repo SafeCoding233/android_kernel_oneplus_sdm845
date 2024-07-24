@@ -804,6 +804,8 @@ static int _init_main_clk(struct omap_hwmod *oh)
 		oh->_clk = clk;
 		soc_ops.disable_direct_prcm(oh);
 		oh->main_clk = kstrdup(name, GFP_KERNEL);
+		if (!oh->main_clk)
+			return -ENOMEM;
 	} else {
 		if (!oh->main_clk)
 			return 0;

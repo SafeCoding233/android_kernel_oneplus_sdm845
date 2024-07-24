@@ -223,6 +223,11 @@ int main(int argc, char **argv)
 	 * generate raw output insted.
 	 */
 	name = strdup(argv[3]);
+	if (!name) {
+		printf("strdup failed, no memory\n");
+		return 1;
+	}
+		
 	namelen = strlen(name);
 	if (namelen >= 3 && !strcmp(name + namelen - 3, ".so")) {
 		name = NULL;

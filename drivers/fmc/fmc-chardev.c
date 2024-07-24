@@ -142,6 +142,10 @@ static int fc_probe(struct fmc_device *fmc)
 	fc->misc.minor = MISC_DYNAMIC_MINOR;
 	fc->misc.fops = &fc_fops;
 	fc->misc.name = kstrdup(dev_name(&fmc->dev), GFP_KERNEL);
+	if (!fc->misc.name) {
+		kfree(fc);
+		return -ENOMEM;
+	}
 
 	ret = misc_register(&fc->misc);
 	if (ret < 0)
